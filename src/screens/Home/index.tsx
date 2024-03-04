@@ -1,6 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { Participant } from "../../comoponents/Participant";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { styles } from "./styles";
 
 export function Home() {
@@ -15,6 +21,11 @@ export function Home() {
     "hola",
     "lifeisgoood",
     "blabla",
+    "joao",
+    "luiz",
+    "renan",
+    "mccall",
+    "mathews",
   ];
   return (
     <View style={styles.container}>
@@ -30,9 +41,11 @@ export function Home() {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
-      {participants.map((participant) => (
-        <Participant key={participant} name={participant} />
-      ))}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {participants.map((participant) => (
+          <Participant key={participant} name={participant} />
+        ))}
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
