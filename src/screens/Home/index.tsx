@@ -7,6 +7,15 @@ export function Home() {
   function handleAddParticipant() {
     console.log("voce adicionou um novo partiicpante.");
   }
+
+  const participants = [
+    "maia",
+    "mateus",
+    "flourence",
+    "hola",
+    "lifeisgoood",
+    "blabla",
+  ];
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>Nome do evento</Text>
@@ -21,8 +30,9 @@ export function Home() {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
-      <Participant />
-      <Participant />
+      {participants.map((participant) => (
+        <Participant key={participant} name={participant} />
+      ))}
       <StatusBar style="auto" />
     </View>
   );
