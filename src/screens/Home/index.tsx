@@ -6,12 +6,33 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from "react-native";
 import { styles } from "./styles";
 
 export function Home() {
   function handleAddParticipant() {
+    if (participants.includes("Maia")) {
+      return Alert.alert(
+        "Participante já existe",
+        "Já existe um participante na lista com este nome."
+      );
+    }
     console.log("voce adicionou um novo partiicpante.");
+  }
+  function handleRemoveParticipant(name: string) {
+    Alert.alert("Remover participante", `Deseja remover o/a ${name}`, [
+      {
+        text: "Sim",
+        onPress: () => {
+          Alert.alert("Deletado");
+        },
+      },
+      {
+        text: "Não",
+        style: "cancel",
+      },
+    ]);
   }
 
   const participants = [
@@ -44,7 +65,13 @@ export function Home() {
       <FlatList
         data={participants}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <Participant key={item} name={item} />}
+        renderItem={({ item }) => (
+          <Participant
+            key={item}
+            name={item}
+            onRemove={() => handleRemoveParticipant(item)}
+          />
+        )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => (
           <Text style={styles.listEmptyText}>
@@ -53,8 +80,6 @@ export function Home() {
           </Text>
         )}
       />
-
-      <StatusBar style="auto" />
     </View>
   );
 }
