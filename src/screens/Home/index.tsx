@@ -23,7 +23,7 @@ export function Home() {
       );
     }
     setParticipants((prevState) => [...prevState, participantName]);
-    console.log("voce adicionou um novo partiicpante.");
+    setParticipantName("");
   }
 
   function handleRemoveParticipant(name: string) {
@@ -31,10 +31,8 @@ export function Home() {
       {
         text: "Sim",
         onPress: () => {
-          Alert.alert("Deletado");
-
           const newArrayAfterDeleteName = participants.filter(
-            (e) => e !== name
+            (participant) => participant !== name
           );
           setParticipants(newArrayAfterDeleteName);
         },
