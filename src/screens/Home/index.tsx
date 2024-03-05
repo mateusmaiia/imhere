@@ -12,21 +12,31 @@ import { styles } from "./styles";
 import { useState } from "react";
 
 export function Home() {
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState("");
+
   function handleAddParticipant() {
-    if (participants.includes("Maia")) {
+    if (participants.includes(participantName)) {
       return Alert.alert(
         "Participante já existe",
         "Já existe um participante na lista com este nome."
       );
     }
+    setParticipants((prevState) => [...prevState, participantName]);
     console.log("voce adicionou um novo partiicpante.");
   }
+
   function handleRemoveParticipant(name: string) {
     Alert.alert("Remover participante", `Deseja remover o/a ${name}`, [
       {
         text: "Sim",
         onPress: () => {
           Alert.alert("Deletado");
+
+          const newArrayAfterDeleteName = participants.filter(
+            (e) => e !== name
+          );
+          setParticipants(newArrayAfterDeleteName);
         },
       },
       {
@@ -36,7 +46,6 @@ export function Home() {
     ]);
   }
 
-  const [participants, setParticipants] = useState<string[]>([]);
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>Nome do evento</Text>
@@ -46,6 +55,8 @@ export function Home() {
           style={styles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6b6b6b"
+          onChangeText={(e) => setParticipantName(e)}
+          value={participantName}
         />
         <TouchableOpacity style={styles.button} onPress={handleAddParticipant}>
           <Text style={styles.buttonText}>+</Text>
