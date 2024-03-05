@@ -9,6 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { styles } from "./styles";
+import { useState } from "react";
 
 export function Home() {
   function handleAddParticipant() {
@@ -35,19 +36,7 @@ export function Home() {
     ]);
   }
 
-  const participants = [
-    "maia",
-    "mateus",
-    "flourence",
-    "hola",
-    "lifeisgoood",
-    "blabla",
-    "joao",
-    "luiz",
-    "renan",
-    "mccall",
-    "mathews",
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>Nome do evento</Text>
